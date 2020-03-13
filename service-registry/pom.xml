@@ -24,6 +24,7 @@
     <jacoco-plugin.version>0.8.5</jacoco-plugin.version>
     <formatter-plugin.version>2.11.0</formatter-plugin.version>
     <findbugs-plugin.version>3.0.5</findbugs-plugin.version>
+    <docker.registry>registry.hub.docker.com</docker.registry>
   </properties>
 
   <dependencies>
@@ -188,6 +189,29 @@
         </executions>
       </plugin>
       <!-- End Findbug config -->
+      <!-- Adding docker plugin -->
+      <plugin>
+        <groupId>com.spotify</groupId>
+        <artifactId>dockerfile-maven-plugin</artifactId>
+        <version>1.4.8</version>
+        <configuration>
+          <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
+          <repository>edwinalex035/${project.artifactId}</repository>
+          <tag>${project.version}</tag>
+          <buildArgs>
+            <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+          </buildArgs>
+        </configuration>
+        <executions>
+          <execution>
+            <id>default</id>
+            <phase>install</phase>
+            <goals>
+              <goal>build</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 
