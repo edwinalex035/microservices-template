@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: api-gateway
+
+server:
+  port: 8000
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
